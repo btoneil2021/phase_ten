@@ -1,0 +1,110 @@
+Definition
+
+Phase 10 is a commercial matching card game created by Kenneth Johnson in 1982. It is largely influenced by the classic game of Rummy.
+
+Step-by-Step Instructions
+The game is designed for 2-6 players, and all you need to play is a proprietary Phase 10 card deck.
+
+The Goal
+Much like other variations of Rummy, the goal of each round is to play out all cards from your hand to win the round.
+
+The uniqueness of Phase 10 comes from the prerequisite requirements, also known as contracts.
+
+Dealing
+Each player is dealt 10 cards, one at a time. The cards are obscured from the other players. The remaining cards are set face-down to the side, forming the draw pile. The top card of the draw pile is revealed and set aside to form the discard pile.
+
+The Play
+Phase 10 plays like Rummy, where each player takes their turn in order. The player draws 1 card from either the draw pile or the discard pile. If the player has completed the conditions of the current phase, they reveal the completed phase and set it aside.
+
+Each turn then ends with a player discarding a card of their choosing from their hand.
+
+The 10 Phases
+The 10 phases of the game are:
+
+2 sets of 3
+1 set of 3 + 1 run of 4
+1 set of 4 + 1 run of 4
+1 run of 7
+1 run of 8
+1 run of 9
+2 sets of 4
+7 cards of one color
+1 set of 5 + 1 set of 2
+1 set of 5 + 1 set of 3
+Sets are combinations of cards from the same rank. An example set of 5 being 5, 5, 5, 5, WILD.
+
+Runs are sequences of cards with an increasing rank. An example of a run of 4 is 8, 9, 10, 11.
+
+Note that wild cards can substitute any card in a set or run.
+
+Also, colors do not matter in how you play Phase 10, and are a leftover mechanic from older versions where sets and runs needed to be made of a single color.
+
+Each phase must be completed before players can “hit on”. Once a player completes a phase, they will need to complete the following phase in the following round, even if they lose the round.
+
+Skips
+The Skip card can be discarded at the end of a player’s turn. In 2-player games, the player then gets to take his/her next turn immediately, skipping the opponent’s turn entirely.
+
+Hitting On
+Hitting on allows players to play extra cards onto completed sets or runs after completing their phase conditions. Players can hit as many cards as they can per turn.
+
+An example of hitting on is shown in the Example Plays section of the guide.
+
+After hitting off cards, players must still discard a card to end their turn.
+
+Going Out
+Going out is when a player manages to clear his/her hand of all cards. Scores are then awarded based on the remaining card in the losing player’s hand.
+
+The round ends and players continue with the following round.
+
+How to Win?
+In general, the first player to complete the 10th and final phase wins. However, if both players complete the final phase in the same hand, the round is played to its conclusion, and the player with the most points will win the game. This is discussed in the Scoring section of the guide.
+
+Phase 10 Rules
+We summarized the key instructions and official rules for Phase 10 below:
+
+Each player is dealt 10 cards in total.
+Players draw one card at the start of their turn and discard one card at the end of their turn.
+Players must complete their phases before being allowed to hit on cards.
+Once a player clears their hand of cards, they have gone out and won the round.
+If a player has completed their designated phase, players will need to complete the following phase in the list in the upcoming round.
+The first player to complete the 10th phase wins.
+If both players complete the last phase in the same round, the winner is determined by scores.
+Scoring and Points
+Scoring in Phase 10 is done based on the remaining cards in hand at the end of each round. Since each round ends with a player clearing all cards from their hand, the winner is awarded the sum of card values in the opposing player’s hand.
+
+Point values are as follows:
+
+Card	Value
+1-9	5 Points
+10-12	10 Points
+Skip Card	15 Points
+Wild Card	25 Points
+For example:
+
+Player 1 wins the round with a cleared hand. Thus, Player 2 is awarded 0 points.
+Player 2 has the following hand: 2, 6, 7. Thus, Player 1 is awarded 5+5+5=15 points.
+An example Phase 10 scoring sheet is shown below:
+
+Phase 10 scoring sheet templare
+Example Hand
+An example Phase 10 card game hand with both players on Phase 1 is shown below:
+
+Player 1 has completed Phase 1 with two sets of 3.
+
+3, 3, 3 – 7, 7, WILD
+
+Player 2 has also completed his current phase, so Player 2 is allowed to play his/her cards to the sets.
+
+Player 2 has two 7 cards, and he can play them onto Player 1’s set of 7s.
+
+This process continues until a player has managed to clear all cards from their hands.
+
+Since both players have completed Phase 1, they will need to complete Phase 2 in the following round, no matter which player wins or loses.
+
+Strategy and Tips
+The key in Phase 10 strategy is to play out as many cards as possible. Having more cards is a negative if you lose.
+Don’t give up. Even if your opponent has completed their phases, you can keep pace by completing your phases before they clear their hand.
+Hit on completed sets whenever possible. There is no benefit to keeping cards in hand once you’ve completed your phase.
+Remember you can play cards on your opponent’s sets and sequences.
+Remember that you can take the top of the discard pile if it is a card you need.
+Rush phases whenever possible. Winning via being the first to complete all the phases is a viable strategy.
