@@ -1,0 +1,21 @@
+# Documentation and info files
+README.md
+rules.txt
+current_bugs.md
+
+# Test files
+test_*.py
+run_tests.bat
+test_bugs.py
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
