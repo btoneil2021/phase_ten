@@ -190,7 +190,7 @@ class Phase10Game:
                 }
                 for p in self.players
             ],
-            'discard_top': str(self.peek_discard_top()) if self.peek_discard_top() else None,
+            'discard_top': self.peek_discard_top(),
             'deck_size': self.deck.cards_remaining(),
             'game_over': self.state.game_over,
             'winner': self.state.winner.name if self.state.winner else None
