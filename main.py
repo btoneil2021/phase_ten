@@ -81,30 +81,51 @@ class Phase10CLI:
     def play_turn(self, player: Player):
         """Play a single player's turn"""
         self.clear_console()
-        print(f"--- {player.name}'s turn ---")
+        print("="*60)
+        print(f"                    {player.name}'s TURN")
+        print("="*60)
+        
         self.show_player_status(player)
         self.show_game_state()
         
         # Show current hand before drawing
+        print("\n" + "-"*40)
+        print("YOUR CURRENT HAND (before drawing):")
+        print("-"*40)
         self.show_player_hand(player)
         
         # Phase 1: Draw a card
+        print("\n" + "-"*40)
+        print("PHASE 1: DRAW A CARD")
+        print("-"*40)
         drawn_card = self.handle_draw_phase(player)
         if drawn_card:
-            print(f"Drew: {drawn_card}")
+            print(f"\n>>> You drew: {drawn_card}")
         
         # Show updated hand
+        print("\n" + "-"*40)
+        print("YOUR UPDATED HAND (after drawing):")
+        print("-"*40)
         self.show_player_hand(player)
         
         # Phase 2: Complete phase if possible and not already completed
         if not player.completed_phase_this_round:
+            print("\n" + "-"*40)
+            print("PHASE 2: COMPLETE YOUR PHASE (Optional)")
+            print("-"*40)
             self.handle_phase_completion(player)
         
         # Phase 3: Hit on phases (if phase completed)
         if player.completed_phase_this_round:
+            print("\n" + "-"*40)
+            print("PHASE 3: HIT ON PHASES (Optional)")
+            print("-"*40)
             self.handle_hitting_phase(player)
         
         # Phase 4: Discard a card
+        print("\n" + "-"*40)
+        print("PHASE 4: DISCARD A CARD (Required)")
+        print("-"*40)
         skip_count = self.handle_discard_phase(player)
         
         # Advance turn
@@ -112,29 +133,29 @@ class Phase10CLI:
     
     def handle_draw_phase(self, player: Player) -> Optional[Card]:
         """Handle the draw phase of a turn"""
-        print("\nDraw a card:")
-        print("1. Draw from deck")
+        print("\nChoose where to draw from:")
+        print("  [1] Draw from deck")
         
         top_discard = self.game.peek_discard_top()
         # Skip cards cannot be picked up from discard pile
         can_take_discard = top_discard and top_discard.card_type != CardType.SKIP
         
         if can_take_discard:
-            print(f"2. Take from discard pile ({top_discard})")
+            print(f"  [2] Take from discard pile: {top_discard}")
         elif top_discard and top_discard.card_type == CardType.SKIP:
-            print(f"2. Discard pile has Skip card (cannot be taken)")
+            print(f"  [2] Discard pile: Skip card (CANNOT BE TAKEN)")
         
         while True:
-            choice = input("Choose option (1 or 2): ").strip()
+            choice = input("\nYour choice (1 or 2): ").strip()
             if choice == "1":
                 return self.game.player_draw_card(player, from_discard=False)
             elif choice == "2" and can_take_discard:
                 return self.game.player_draw_card(player, from_discard=True)
             else:
                 if choice == "2" and not can_take_discard:
-                    print("Cannot take Skip card from discard pile. Please draw from deck.")
+                    print("[ERROR] Cannot take Skip card from discard pile. Please draw from deck.")
                 else:
-                    print("Invalid choice. Please enter 1 or 2.")
+                    print("[ERROR] Invalid choice. Please enter 1 or 2.")
     
     def handle_phase_completion(self, player: Player):
         """Handle phase completion attempt"""
@@ -202,12 +223,19 @@ class Phase10CLI:
                 print("No available targets for hitting.")
                 break
             
-            print("\nAvailable targets:")
+            print("\n" + "="*50)
+            print("AVAILABLE TARGETS FOR HITTING:")
+            print("="*50)
+            
             if player.completed_phase_this_round:
-                print("0. Hit on your own phase")
+                current_phase = player.get_current_phase()
+                print(f"\n0. YOUR OWN PHASE (Phase {current_phase.phase_number}: {current_phase.description})")
+                print("   Your cards:", ", ".join(str(c) for c in player.completed_phase_cards))
             
             for i, target in enumerate(targets, 1):
-                print(f"{i}. {target.name} (Phase {target.current_phase})")
+                target_phase = target.get_current_phase()
+                print(f"\n{i}. {target.name}'s PHASE (Phase {target_phase.phase_number}: {target_phase.description})")
+                print(f"   Their cards: {', '.join(str(c) for c in target.completed_phase_cards)}")
             
             # Select target and card
             target_choice = input("Select target (or 'done' to finish): ").strip()
@@ -285,13 +313,20 @@ class Phase10CLI:
     def show_player_status(self, player: Player):
         """Show current player's status"""
         current_phase = player.get_current_phase()
-        print(f"Player: {player.name}")
-        print(f"Current Phase: {current_phase}")
-        print(f"Score: {player.score}")
+        print("\n" + "-"*40)
+        print("YOUR STATUS")
+        print("-"*40)
+        print(f"Name: {player.name}")
+        print(f"Current Phase: Phase {current_phase.phase_number} - {current_phase.description}")
+        print(f"Total Score: {player.score} points")
+        
         if player.completed_phase_this_round:
-            print("Phase completed this round!")
+            print("\n[COMPLETED] PHASE COMPLETED THIS ROUND!")
+            print("Completed cards:")
+            for card in player.completed_phase_cards:
+                print(f"  - {card}")
         else:
-            print(f"Phase Hint: {self._get_phase_hint(current_phase)}")
+            print(f"\n[!] Phase Requirements: {self._get_phase_hint(current_phase)}")
     
     def _get_phase_hint(self, phase: Phase) -> str:
         """Get a helpful hint for completing the current phase"""
@@ -327,17 +362,22 @@ class Phase10CLI:
     def show_game_state(self):
         """Show current game state"""
         status = self.game.get_game_status()
-        print(f"\nGame State:")
+        print("\n" + "-"*40)
+        print("GAME STATUS")
+        print("-"*40)
         print(f"Round: {status['round']}")
         print(f"Deck: {status['deck_size']} cards remaining")
         if status['discard_top']:
-            print(f"Discard pile top: {status['discard_top']}")
+            if status['discard_top'].card_type == CardType.SKIP:
+                print(f"Discard pile top: {status['discard_top']} [CANNOT BE PICKED UP]")
+            else:
+                print(f"Discard pile top: {status['discard_top']}")
         
-        print("\nAll Players:")
+        print("\nOTHER PLAYERS:")
         for player_info in status['players']:
-            completed = " ✓" if player_info['completed_phase'] else ""
-            print(f"  {player_info['name']}: Phase {player_info['phase']}, "
-                  f"{player_info['hand_size']} cards, {player_info['score']} points{completed}")
+            completed = " [PHASE COMPLETED THIS ROUND]" if player_info['completed_phase'] else ""
+            print(f"  - {player_info['name']}: Phase {player_info['phase']}, "
+                  f"{player_info['hand_size']} cards, Score: {player_info['score']}{completed}")
     
     def show_round_scores(self):
         """Show scores after a round"""
