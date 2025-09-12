@@ -116,17 +116,25 @@ class Phase10CLI:
         print("1. Draw from deck")
         
         top_discard = self.game.peek_discard_top()
-        if top_discard:
+        # Skip cards cannot be picked up from discard pile
+        can_take_discard = top_discard and top_discard.card_type != CardType.SKIP
+        
+        if can_take_discard:
             print(f"2. Take from discard pile ({top_discard})")
+        elif top_discard and top_discard.card_type == CardType.SKIP:
+            print(f"2. Discard pile has Skip card (cannot be taken)")
         
         while True:
             choice = input("Choose option (1 or 2): ").strip()
             if choice == "1":
                 return self.game.player_draw_card(player, from_discard=False)
-            elif choice == "2" and top_discard:
+            elif choice == "2" and can_take_discard:
                 return self.game.player_draw_card(player, from_discard=True)
             else:
-                print("Invalid choice. Please enter 1 or 2.")
+                if choice == "2" and not can_take_discard:
+                    print("Cannot take Skip card from discard pile. Please draw from deck.")
+                else:
+                    print("Invalid choice. Please enter 1 or 2.")
     
     def handle_phase_completion(self, player: Player):
         """Handle phase completion attempt"""
@@ -155,6 +163,9 @@ class Phase10CLI:
         print("\nSelect cards for phase completion:")
         print("Enter card numbers separated by spaces (e.g., 1 3 5)")
         
+        # Get the sorted hand to match what was displayed
+        sorted_hand = player.get_sorted_hand()
+        
         while True:
             try:
                 indices = input("Card numbers: ").strip().split()
@@ -165,8 +176,8 @@ class Phase10CLI:
                 selected_cards = []
                 
                 for idx in card_indices:
-                    if 0 <= idx < len(player.hand):
-                        selected_cards.append(player.hand[idx])
+                    if 0 <= idx < len(sorted_hand):
+                        selected_cards.append(sorted_hand[idx])
                     else:
                         print(f"Invalid card number: {idx + 1}")
                         break
@@ -218,10 +229,11 @@ class Phase10CLI:
             
             # Select card to play
             self.show_player_hand(player)
+            sorted_hand = player.get_sorted_hand()
             try:
                 card_idx = int(input("Select card number to play: ")) - 1
-                if 0 <= card_idx < len(player.hand):
-                    card = player.hand[card_idx]
+                if 0 <= card_idx < len(sorted_hand):
+                    card = sorted_hand[card_idx]
                     
                     if target_player == player:
                         success = self.game.player_hit_on_own_phase(player, card)
@@ -242,11 +254,14 @@ class Phase10CLI:
         print("\nSelect a card to discard:")
         self.show_player_hand(player)
         
+        # Get the sorted hand to match what was displayed
+        sorted_hand = player.get_sorted_hand()
+        
         while True:
             try:
                 card_idx = int(input("Card number to discard: ")) - 1
-                if 0 <= card_idx < len(player.hand):
-                    card = player.hand[card_idx]
+                if 0 <= card_idx < len(sorted_hand):
+                    card = sorted_hand[card_idx]
                     
                     if self.game.discard_card(player, card):
                         print(f"Discarded: {card}")
