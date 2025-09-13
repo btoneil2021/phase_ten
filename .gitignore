@@ -9,6 +9,7 @@ run_tests.bat
 test_bugs.py
 simulate_*.py
 test_errors*.py
+run_all_tests.py
 
 # Python cache
 __pycache__/
