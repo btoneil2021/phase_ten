@@ -1,0 +1,576 @@
+{
+  "players": [
+    {
+      "name": "Alice",
+      "hand": [
+        {
+          "rank": 5,
+          "color": "red",
+          "card_type": "number"
+        },
+        {
+          "rank": 5,
+          "color": "blue",
+          "card_type": "number"
+        },
+        {
+          "rank": 5,
+          "color": "green",
+          "card_type": "number"
+        },
+        {
+          "rank": 8,
+          "color": "red",
+          "card_type": "number"
+        },
+        {
+          "rank": 8,
+          "color": "blue",
+          "card_type": "number"
+        },
+        {
+          "rank": 8,
+          "color": "yellow",
+          "card_type": "number"
+        },
+        {
+          "rank": 2,
+          "color": "red",
+          "card_type": "number"
+        },
+        {
+          "rank": 9,
+          "color": "green",
+          "card_type": "number"
+        },
+        {
+          "rank": 10,
+          "color": "blue",
+          "card_type": "number"
+        },
+        {
+          "rank": 11,
+          "color": "yellow",
+          "card_type": "number"
+        }
+      ],
+      "current_phase": 1,
+      "completed_phase_this_round": false,
+      "completed_phase_cards": [],
+      "score": 0
+    },
+    {
+      "name": "Bob",
+      "hand": [
+        {
+          "rank": 6,
+          "color": "blue",
+          "card_type": "number"
+        },
+        {
+          "rank": 2,
+          "color": "blue",
+          "card_type": "number"
+        },
+        {
+          "rank": null,
+          "color": "red",
+          "card_type": "wild"
+        },
+        {
+          "rank": 12,
+          "color": "green",
+          "card_type": "number"
+        },
+        {
+          "rank": 9,
+          "color": "blue",
+          "card_type": "number"
+        },
+        {
+          "rank": 5,
+          "color": "red",
+          "card_type": "number"
+        },
+        {
+          "rank": 12,
+          "color": "yellow",
+          "card_type": "number"
+        },
+        {
+          "rank": null,
+          "color": "red",
+          "card_type": "skip"
+        },
+        {
+          "rank": 1,
+          "color": "green",
+          "card_type": "number"
+        },
+        {
+          "rank": 9,
+          "color": "green",
+          "card_type": "number"
+        }
+      ],
+      "current_phase": 1,
+      "completed_phase_this_round": false,
+      "completed_phase_cards": [],
+      "score": 0
+    }
+  ],
+  "deck": {
+    "cards": [
+      {
+        "rank": null,
+        "color": "yellow",
+        "card_type": "skip"
+      },
+      {
+        "rank": 2,
+        "color": "blue",
+        "card_type": "number"
+      },
+      {
+        "rank": 1,
+        "color": "blue",
+        "card_type": "number"
+      },
+      {
+        "rank": 5,
+        "color": "yellow",
+        "card_type": "number"
+      },
+      {
+        "rank": 8,
+        "color": "blue",
+        "card_type": "number"
+      },
+      {
+        "rank": 6,
+        "color": "red",
+        "card_type": "number"
+      },
+      {
+        "rank": 5,
+        "color": "green",
+        "card_type": "number"
+      },
+      {
+        "rank": 2,
+        "color": "red",
+        "card_type": "number"
+      },
+      {
+        "rank": 3,
+        "color": "red",
+        "card_type": "number"
+      },
+      {
+        "rank": 5,
+        "color": "yellow",
+        "card_type": "number"
+      },
+      {
+        "rank": 11,
+        "color": "yellow",
+        "card_type": "number"
+      },
+      {
+        "rank": 7,
+        "color": "red",
+        "card_type": "number"
+      },
+      {
+        "rank": 3,
+        "color": "yellow",
+        "card_type": "number"
+      },
+      {
+        "rank": 11,
+        "color": "green",
+        "card_type": "number"
+      },
+      {
+        "rank": 1,
+        "color": "red",
+        "card_type": "number"
+      },
+      {
+        "rank": 5,
+        "color": "blue",
+        "card_type": "number"
+      },
+      {
+        "rank": 8,
+        "color": "blue",
+        "card_type": "number"
+      },
+      {
+        "rank": 12,
+        "color": "blue",
+        "card_type": "number"
+      },
+      {
+        "rank": 8,
+        "color": "yellow",
+        "card_type": "number"
+      },
+      {
+        "rank": null,
+        "color": "green",
+        "card_type": "wild"
+      },
+      {
+        "rank": 8,
+        "color": "red",
+        "card_type": "number"
+      },
+      {
+        "rank": null,
+        "color": "red",
+        "card_type": "wild"
+      },
+      {
+        "rank": 12,
+        "color": "red",
+        "card_type": "number"
+      },
+      {
+        "rank": 9,
+        "color": "green",
+        "card_type": "number"
+      },
+      {
+        "rank": 9,
+        "color": "yellow",
+        "card_type": "number"
+      },
+      {
+        "rank": 4,
+        "color": "yellow",
+        "card_type": "number"
+      },
+      {
+        "rank": 3,
+        "color": "blue",
+        "card_type": "number"
+      },
+      {
+        "rank": 1,
+        "color": "yellow",
+        "card_type": "number"
+      },
+      {
+        "rank": 12,
+        "color": "green",
+        "card_type": "number"
+      },
+      {
+        "rank": 8,
+        "color": "green",
+        "card_type": "number"
+      },
+      {
+        "rank": 7,
+        "color": "red",
+        "card_type": "number"
+      },
+      {
+        "rank": 10,
+        "color": "blue",
+        "card_type": "number"
+      },
+      {
+        "rank": 4,
+        "color": "green",
+        "card_type": "number"
+      },
+      {
+        "rank": 7,
+        "color": "green",
+        "card_type": "number"
+      },
+      {
+        "rank": 11,
+        "color": "blue",
+        "card_type": "number"
+      },
+      {
+        "rank": 1,
+        "color": "blue",
+        "card_type": "number"
+      },
+      {
+        "rank": 1,
+        "color": "yellow",
+        "card_type": "number"
+      },
+      {
+        "rank": 6,
+        "color": "red",
+        "card_type": "number"
+      },
+      {
+        "rank": 2,
+        "color": "green",
+        "card_type": "number"
+      },
+      {
+        "rank": 11,
+        "color": "yellow",
+        "card_type": "number"
+      },
+      {
+        "rank": 9,
+        "color": "yellow",
+        "card_type": "number"
+      },
+      {
+        "rank": null,
+        "color": "blue",
+        "card_type": "wild"
+      },
+      {
+        "rank": 4,
+        "color": "blue",
+        "card_type": "number"
+      },
+      {
+        "rank": 7,
+        "color": "green",
+        "card_type": "number"
+      },
+      {
+        "rank": null,
+        "color": "blue",
+        "card_type": "wild"
+      },
+      {
+        "rank": 11,
+        "color": "green",
+        "card_type": "number"
+      },
+      {
+        "rank": 9,
+        "color": "red",
+        "card_type": "number"
+      },
+      {
+        "rank": 11,
+        "color": "red",
+        "card_type": "number"
+      },
+      {
+        "rank": 3,
+        "color": "red",
+        "card_type": "number"
+      },
+      {
+        "rank": 6,
+        "color": "green",
+        "card_type": "number"
+      },
+      {
+        "rank": null,
+        "color": "green",
+        "card_type": "skip"
+      },
+      {
+        "rank": null,
+        "color": "blue",
+        "card_type": "skip"
+      },
+      {
+        "rank": 7,
+        "color": "blue",
+        "card_type": "number"
+      },
+      {
+        "rank": 10,
+        "color": "red",
+        "card_type": "number"
+      },
+      {
+        "rank": 9,
+        "color": "blue",
+        "card_type": "number"
+      },
+      {
+        "rank": 9,
+        "color": "red",
+        "card_type": "number"
+      },
+      {
+        "rank": 6,
+        "color": "yellow",
+        "card_type": "number"
+      },
+      {
+        "rank": 1,
+        "color": "green",
+        "card_type": "number"
+      },
+      {
+        "rank": 8,
+        "color": "red",
+        "card_type": "number"
+      },
+      {
+        "rank": 10,
+        "color": "green",
+        "card_type": "number"
+      },
+      {
+        "rank": 10,
+        "color": "yellow",
+        "card_type": "number"
+      },
+      {
+        "rank": 7,
+        "color": "yellow",
+        "card_type": "number"
+      },
+      {
+        "rank": 7,
+        "color": "yellow",
+        "card_type": "number"
+      },
+      {
+        "rank": 4,
+        "color": "red",
+        "card_type": "number"
+      },
+      {
+        "rank": 2,
+        "color": "red",
+        "card_type": "number"
+      },
+      {
+        "rank": 10,
+        "color": "green",
+        "card_type": "number"
+      },
+      {
+        "rank": 10,
+        "color": "yellow",
+        "card_type": "number"
+      },
+      {
+        "rank": 2,
+        "color": "yellow",
+        "card_type": "number"
+      },
+      {
+        "rank": 2,
+        "color": "green",
+        "card_type": "number"
+      },
+      {
+        "rank": 2,
+        "color": "yellow",
+        "card_type": "number"
+      },
+      {
+        "rank": 6,
+        "color": "yellow",
+        "card_type": "number"
+      },
+      {
+        "rank": 10,
+        "color": "blue",
+        "card_type": "number"
+      },
+      {
+        "rank": 4,
+        "color": "red",
+        "card_type": "number"
+      },
+      {
+        "rank": 10,
+        "color": "red",
+        "card_type": "number"
+      },
+      {
+        "rank": 12,
+        "color": "yellow",
+        "card_type": "number"
+      },
+      {
+        "rank": 4,
+        "color": "blue",
+        "card_type": "number"
+      },
+      {
+        "rank": null,
+        "color": "yellow",
+        "card_type": "wild"
+      },
+      {
+        "rank": 7,
+        "color": "blue",
+        "card_type": "number"
+      },
+      {
+        "rank": 5,
+        "color": "blue",
+        "card_type": "number"
+      },
+      {
+        "rank": 3,
+        "color": "yellow",
+        "card_type": "number"
+      },
+      {
+        "rank": 6,
+        "color": "green",
+        "card_type": "number"
+      },
+      {
+        "rank": 5,
+        "color": "green",
+        "card_type": "number"
+      },
+      {
+        "rank": 4,
+        "color": "green",
+        "card_type": "number"
+      },
+      {
+        "rank": 11,
+        "color": "blue",
+        "card_type": "number"
+      },
+      {
+        "rank": 8,
+        "color": "yellow",
+        "card_type": "number"
+      },
+      {
+        "rank": 12,
+        "color": "blue",
+        "card_type": "number"
+      },
+      {
+        "rank": 6,
+        "color": "blue",
+        "card_type": "number"
+      }
+    ]
+  },
+  "discard_pile": {
+    "cards": [
+      {
+        "rank": 8,
+        "color": "green",
+        "card_type": "number"
+      }
+    ]
+  },
+  "state": {
+    "round_number": 1,
+    "current_player_index": 0,
+    "game_over": false,
+    "winner_name": null
+  }
+}

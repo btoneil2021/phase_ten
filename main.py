@@ -2,13 +2,16 @@ from typing import List, Optional
 import os
 from game import Phase10Game
 from player import Player
-from cards import Card, CardType
+from cards import Card, CardType, Color
 from phases import PHASES, Phase
+from game_states import GameStateManager
 
 
 class Phase10CLI:
     def __init__(self):
         self.game: Optional[Phase10Game] = None
+        self.debug_mode = False
+        self.state_manager = GameStateManager()
     
     def start_game(self):
         """Start a new Phase 10 game"""
@@ -146,7 +149,13 @@ class Phase10CLI:
             print(f"  [2] Discard pile: Skip card (CANNOT BE TAKEN)")
         
         while True:
-            choice = input("\nYour choice (1 or 2): ").strip()
+            choice = input("\nYour choice (1 or 2, or /help for debug): ").strip()
+            
+            # Check for debug commands
+            if choice.startswith('/'):
+                self.handle_debug_command(choice, player)
+                continue
+                
             if choice == "1":
                 return self.game.player_draw_card(player, from_discard=False)
             elif choice == "2" and can_take_discard:
@@ -398,6 +407,164 @@ class Phase10CLI:
         sorted_players = sorted(self.game.players, key=lambda p: p.score, reverse=True)
         for i, player in enumerate(sorted_players, 1):
             print(f"{i}. {player.name}: {player.score} points (Phase {player.current_phase})")
+    
+    def handle_debug_command(self, command: str, player: Player) -> bool:
+        """Handle debug commands. Returns True if command was handled."""
+        if not self.debug_mode and command != '/debug':
+            print("Debug mode not enabled. Type /debug to enable.")
+            return False
+        
+        parts = command.split()
+        cmd = parts[0].lower()
+        
+        if cmd == '/debug':
+            self.debug_mode = not self.debug_mode
+            print(f"Debug mode: {'ENABLED' if self.debug_mode else 'DISABLED'}")
+            return True
+        
+        if not self.debug_mode:
+            return False
+        
+        if cmd == '/help':
+            print("\n" + "="*50)
+            print("DEBUG COMMANDS:")
+            print("="*50)
+            print("/debug - Toggle debug mode")
+            print("/give [rank] [color] - Add card to hand (rank: 1-12 or wild/skip)")
+            print("/phase [n] - Jump to phase n (1-10)")
+            print("/complete - Auto-complete current phase")
+            print("/skip - Add skip card to hand")
+            print("/wild - Add wild card to hand")
+            print("/cards [n] - Set hand size to n cards")
+            print("/score [n] - Set current player's score")
+            print("/round [n] - Jump to round n")
+            print("/show - Show detailed game state")
+            print("/save [name] - Save current game state")
+            print("/load [name] - Load saved game state")
+            print("/states - List available saved states")
+            print("="*50)
+            return True
+        
+        elif cmd == '/give' and len(parts) >= 3:
+            rank_str = parts[1].lower()
+            color_str = parts[2].upper()
+            
+            # Parse rank
+            if rank_str == 'wild':
+                card = Card(None, Color[color_str], CardType.WILD)
+            elif rank_str == 'skip':
+                card = Card(None, Color[color_str], CardType.SKIP)
+            else:
+                rank = int(rank_str)
+                card = Card(rank, Color[color_str], CardType.NUMBER)
+            
+            player.add_card_to_hand(card)
+            print(f"[DEBUG] Added {card} to hand")
+            return True
+        
+        elif cmd == '/phase' and len(parts) == 2:
+            phase_num = int(parts[1])
+            if 1 <= phase_num <= 10:
+                player.current_phase = phase_num
+                print(f"[DEBUG] Jumped to Phase {phase_num}")
+            return True
+        
+        elif cmd == '/complete':
+            # Auto-complete current phase with valid cards
+            phase = player.get_current_phase()
+            print(f"[DEBUG] Auto-completing {phase}")
+            
+            # Clear hand and add exact cards needed
+            player.hand = []
+            
+            if phase.phase_number == 1:  # 2 sets of 3
+                for rank in [5, 8]:
+                    for color in [Color.RED, Color.BLUE, Color.GREEN]:
+                        player.add_card_to_hand(Card(rank, color))
+            elif phase.phase_number == 2:  # 1 set of 3 + 1 run of 4
+                # Set of 3
+                for color in [Color.RED, Color.BLUE, Color.GREEN]:
+                    player.add_card_to_hand(Card(5, color))
+                # Run of 4
+                for i in range(7, 11):
+                    player.add_card_to_hand(Card(i, Color.YELLOW))
+            # Add more phases as needed...
+            
+            print(f"[DEBUG] Added cards for phase completion")
+            return True
+        
+        elif cmd == '/skip':
+            player.add_card_to_hand(Card(None, Color.RED, CardType.SKIP))
+            print("[DEBUG] Added Skip card to hand")
+            return True
+        
+        elif cmd == '/wild':
+            player.add_card_to_hand(Card(None, Color.RED, CardType.WILD))
+            print("[DEBUG] Added Wild card to hand")
+            return True
+        
+        elif cmd == '/cards' and len(parts) == 2:
+            n = int(parts[1])
+            # Adjust hand size
+            while len(player.hand) < n:
+                card = self.game.draw_from_deck()
+                if card:
+                    player.add_card_to_hand(card)
+            while len(player.hand) > n:
+                player.hand.pop()
+            print(f"[DEBUG] Set hand size to {n} cards")
+            return True
+        
+        elif cmd == '/score' and len(parts) == 2:
+            player.score = int(parts[1])
+            print(f"[DEBUG] Set score to {player.score}")
+            return True
+        
+        elif cmd == '/round' and len(parts) == 2:
+            self.game.state.round_number = int(parts[1])
+            print(f"[DEBUG] Set round to {self.game.state.round_number}")
+            return True
+        
+        elif cmd == '/show':
+            print("\n[DEBUG] Detailed Game State:")
+            print(f"Round: {self.game.state.round_number}")
+            print(f"Current Player: {player.name}")
+            print(f"Phase: {player.current_phase}")
+            print(f"Completed this round: {player.completed_phase_this_round}")
+            print(f"Hand ({len(player.hand)} cards):")
+            for i, card in enumerate(player.hand, 1):
+                print(f"  {i}. {card}")
+            return True
+        
+        elif cmd == '/save' and len(parts) == 2:
+            name = parts[1]
+            success = self.state_manager.save_game_state(self.game, name)
+            if success:
+                print(f"[DEBUG] Game state saved as '{name}'")
+            return True
+        
+        elif cmd == '/load' and len(parts) == 2:
+            name = parts[1]
+            loaded_game = self.state_manager.load_game_state(name)
+            if loaded_game:
+                self.game = loaded_game
+                print(f"[DEBUG] Game state loaded from '{name}'")
+                print(f"[DEBUG] Now on Round {self.game.state.round_number}, Current player: {self.game.get_current_player().name}")
+            return True
+        
+        elif cmd == '/states':
+            states = self.state_manager.list_available_states()
+            if states:
+                print("[DEBUG] Available saved states:")
+                for state in states:
+                    print(f"  - {state}")
+            else:
+                print("[DEBUG] No saved states found")
+            return True
+        
+        else:
+            print(f"[DEBUG] Unknown command: {command}")
+            return False
 
 
 def main():
